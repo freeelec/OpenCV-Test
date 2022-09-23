@@ -1,3 +1,67 @@
+
+#include <opencv2/opencv.hpp>
+#include <iostream>
+
+using namespace cv;
+using namespace std;
+
+int main(int, char**)
+{
+	Mat frame;												// OpenCV에서 가장 기본이 되는 Matrix 구조체(이미지를 읽어 해당 정보를 Mat형태로 변환)
+	VideoCapture cap;										// 동영상 불러오기
+	cap.open(0);											// 동영상 열기(Camera 열기) + 카메라번호(0(내장 우선))
+	if (!cap.isOpened())
+	{
+		cout << "Error! Cannot open the camera" << endl;
+		return -1;
+	}
+	while (1)
+	{
+		cap.read(frame);									// 비디오의 한 프레임씩 read
+		imshow("LIVE", frame);								// 프레임을 화면에 display
+		if (waitKey(5) >= 0)								// 5만큼 키입력을 대기하고, 발생시 반환
+			break;
+	}
+	return 0;
+}
+
+/*
+#include <opencv2/opencv.hpp>
+#include <iostream>
+#include <stdio.h>
+
+using namespace std;
+using namespace cv;
+
+int main(int argv, char** argc)
+{
+	Mat frame;
+	VideoCapture cap;
+
+	//int deviceID = 0;
+	//int apiID = cv::CAP_ANY;
+	//cap.open(deviceID + apiID);
+
+	cap.open(0);
+
+	if (!cap.isOpened())
+	{
+		cerr << "Unable to open Camera\n";
+		return -1;
+	}
+
+	while (1)
+	{
+		cap.read(frame);
+
+		imshow("LIVE", frame);
+		if (waitKey(1) >= 0)
+			break;
+	}
+	return 0;
+}
+*/
+
 /*
 #include "opencv2/opencv.hpp"
 #include <iostream>
