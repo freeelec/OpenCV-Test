@@ -3,6 +3,38 @@
 #include <iostream>
 
 using namespace cv;
+//using namespace std;
+
+int main(int, char**)
+{
+	std::string path = "D:\\test\\lenna.bmp";
+	Mat img = imread(path);
+	Mat imgResize, imgGray, imgEdge, imgSobel, imgBlur;
+
+	resize(img, imgResize, Size(), 0.5, 0.5);
+	cvtColor(imgResize, imgGray, COLOR_BGR2GRAY);
+	Canny(imgGray, imgEdge, 100, 200);
+	Canny(imgGray, imgSobel, 100, 200, 5, false);
+	GaussianBlur(imgGray, imgBlur, Size(3, 3), 0);
+
+	imshow("Image", img);
+	imshow("Image Resize", imgResize);
+	imshow("Image Gray", imgGray);
+	imshow("Image Canny", imgEdge);
+	imshow("Image Sobel", imgSobel);
+	imshow("Image Blur", imgBlur);
+
+	waitKey(0);
+
+	return 0;
+}
+
+
+/*
+#include <opencv2/opencv.hpp>
+#include <iostream>
+
+using namespace cv;
 using namespace std;
 
 int main(int, char**)
@@ -24,6 +56,7 @@ int main(int, char**)
 	}
 	return 0;
 }
+*/
 
 /*
 #include <opencv2/opencv.hpp>
